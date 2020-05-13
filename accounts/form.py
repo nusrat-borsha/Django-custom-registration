@@ -21,6 +21,7 @@ class CustomerSignUpForm(UserCreationForm):
         user.save()
         customer = Customer.objects.create(user=user)
         customer.phone_number=self.cleaned_data.get('phone_number')
+        customer.locations=self.cleaned_data.get('locations')
         customer.save()
         return user
 
@@ -42,6 +43,7 @@ class EmployeeSignUpForm(UserCreationForm):
         user.last_name = self.cleaned_data.get('last_name')
         user.save()
         employee = Employee.objects.create(user=user)
+        employee.phone_number=self.cleaned_data.get('phone_number')
         employee.designation=self.cleaned_data.get('designation')
         employee.save()
         return user
