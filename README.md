@@ -27,4 +27,4 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-The source code is released under the MIT License.
+The code is licensed under the MIT License.
