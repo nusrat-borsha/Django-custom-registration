@@ -7,6 +7,7 @@ class CustomerSignUpForm(UserCreationForm):
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
     phone_number = forms.CharField(required=True)
+    location = forms.CharField(required=True)
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -26,6 +27,7 @@ class CustomerSignUpForm(UserCreationForm):
 class EmployeeSignUpForm(UserCreationForm):
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
+    phone_number = forms.CharField(required=True)
     designation = forms.CharField(required=True)
 
     class Meta(UserCreationForm.Meta):
@@ -35,6 +37,7 @@ class EmployeeSignUpForm(UserCreationForm):
     def save(self):
         user = super().save(commit=False)
         user.is_employee = True
+        user.is_staff = True
         user.first_name = self.cleaned_data.get('first_name')
         user.last_name = self.cleaned_data.get('last_name')
         user.save()
