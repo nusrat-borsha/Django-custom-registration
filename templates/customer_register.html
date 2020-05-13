@@ -1,3 +1,4 @@
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
 </head>
 <body>
 
-    <section id="register" class=" py-5">
+    <section>
         <div class="container">
           <div class="row">
             <div class="col-md-6 mx-auto">
@@ -21,23 +22,24 @@
                 <div class="card-body">
                     <form action="{% url 'customer_register' %}" method="POST" novalidate>
                       {% csrf_token %}
-
-                     {{form}}
-                
-                        <div class="form-group">
-            
-                          <input type="submit" value="Register" class="btn btn-block btn-primary">
-                        </div>
+                         {% for field in form.visible_fields %}
+                           <div class="form-group">
+                               {{ field.label_tag }}
+                                  {% render_field field class="form-control" %}
+                                    {% for error in field.errors %}
+                                      <span style="color:red">{{ error }}</span>
+                                    {% endfor %}
+                         {% endfor %}
+                             <input type="submit" value="Register" class="btn btn-block btn-primary">
+                           </div>
                     </form>
-        
-                    </div>
+                 </div>
                     </div>   
                 </div>
               </div>
             </div>
         </div>
       </section>
-  
 
 </body>
 </html>
